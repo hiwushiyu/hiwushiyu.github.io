@@ -3,42 +3,51 @@
   <entry>
     <title>hexo和github搭建个人博客</title>
     <url>/2022/05/02/hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h4 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h4><ol>
-<li><p>Node.js<br> 官网：<a href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a></p>
+    <content><![CDATA[<h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
+<li><p>Node.js</p>
+<p> 官网：<a href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a></p>
 </li>
 <li><p>Git</p>
-<p> 官网：<a href="https://git-scm.com/">https://git-scm.com/</a></p>
-<p> 验证安装是否完成，命令函输入：node -v、npm -v、git –version</p>
+<p> 官网：<a href="https://git-scm.com/">https://git-scm.com/</a><br> 验证安装是否完成，命令函输入：node -v、npm -v、git –version</p>
 </li>
 <li><p>hexo下载，命令行输入：npm install hexo-cli -g</p>
 <p> 验证安装是否完成，命令行输入：hexo -v</p>
 </li>
 </ol>
-<h4 id="2、创建github仓库"><a href="#2、创建github仓库" class="headerlink" title="2、创建github仓库"></a>2、创建github仓库</h4><p>仓库名：github账号名.github.io<br>勾选创建readme文件</p>
-<h4 id="3、生成ssh-key"><a href="#3、生成ssh-key" class="headerlink" title="3、生成ssh key"></a>3、生成ssh key</h4><p>空白区域右击文件夹–&gt;Git Bash here<br>输入ssh，检测电脑是否安装ssh</p>
+<h1 id="2、创建github仓库"><a href="#2、创建github仓库" class="headerlink" title="2、创建github仓库"></a>2、创建github仓库</h1><p>仓库名：github账号名.github.io<br>勾选创建readme文件</p>
+<h1 id="3、生成ssh-key"><a href="#3、生成ssh-key" class="headerlink" title="3、生成ssh key"></a>3、生成ssh key</h1><p>空白区域右击文件夹–&gt;Git Bash here<br>输入ssh，检测电脑是否安装ssh</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh</span><br><span class="line">usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]</span><br><span class="line">           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]</span><br><span class="line">           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]</span><br><span class="line">           [-i identity_file] [-J [user@]host[:port]] [-L address]</span><br><span class="line">           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]</span><br><span class="line">           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]</span><br><span class="line">           [-w local_tun[:remote_tun]] destination [<span class="built_in">command</span> [argument ...]]</span><br></pre></td></tr></table></figure>
 
-<p>输入：ssh-keygen -t rsa -C “github账号邮箱”<br>四次回车后会在本地生成文件夹，路径：C:\Users\用户名.ssh\id_rsa.pub<br>复制文件夹中的内容至<br>github–&gt;Settings–&gt;SSH and GPG keys–&gt;New SSH key–&gt;Title随意–&gt;Key粘贴–&gt;Add SSH key</p>
-<p>验证是否绑定成功，输入指令：ssh -T <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#117;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#117;&#x62;&#x2e;&#x63;&#111;&#x6d;</a></p>
+<pre><code>输入：ssh-keygen -t rsa -C &quot;github账号邮箱&quot;
+四次回车后会在本地生成文件夹，路径：C:\Users\用户名\.ssh\id_rsa.pub
+复制文件夹中的内容至
+github--&gt;Settings--&gt;SSH and GPG keys--&gt;New SSH key--&gt;Title随意--&gt;Key粘贴--&gt;Add SSH key
+验证是否绑定成功，输入指令：ssh -T git@github.com
+</code></pre>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line"></span><br><span class="line">Hi hxkwsy! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="4、本地生成博客内容"><a href="#4、本地生成博客内容" class="headerlink" title="4、本地生成博客内容"></a>4、本地生成博客内容</h5><p>本地新建文件夹–&gt;空白处右击–&gt;Get Bash here</p>
+<h1 id="4、本地生成博客内容"><a href="#4、本地生成博客内容" class="headerlink" title="4、本地生成博客内容"></a>4、本地生成博客内容</h1><p>本地新建文件夹–&gt;空白处右击–&gt;Get Bash here</p>
 <ol>
-<li>安装hexo<br>npm install </li>
-<li>初始化hexo（文件夹中生成文件）<br>hexo init</li>
-<li>本地生成静态页面<br>hexo s<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo s</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/ . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
-浏览器输入网页<a href="http://localhost:4000/%EF%BC%8C%E5%8D%B3%E5%8F%AF%E6%9F%A5%E7%9C%8B">http://localhost:4000/，即可查看</a></li>
-<li>发布博客至github服务器<br> 修改配置文件：_config.yml<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">仓库地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-博客根目录下Get Bash here–&gt;安装自动化部署工具：npm install hexo-deployer-git –save</li>
+<li><p>安装hexo<br>npm install </p>
+</li>
+<li><p>初始化hexo（文件夹中生成文件）<br>hexo init</p>
+</li>
+<li><p>本地生成静态页面<br>hexo s</p>
+</li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo s</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/ . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure>
+<p>浏览器输入网页<a href="http://localhost:4000/%EF%BC%8C%E5%8D%B3%E5%8F%AF%E6%9F%A5%E7%9C%8B">http://localhost:4000/，即可查看</a></p>
+<ol start="4">
+<li>发布博客至github服务器<br>修改配置文件：_config.yml</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">仓库地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+<p>博客根目录下Get Bash here–&gt;安装自动化部署工具：npm install hexo-deployer-git –save</p>
 <p>生成页面：hexo g</p>
-<p>上传github（需要输入账号密码）：hexo d</p>
-<p>输入网址即可访问</p>
-<h5 id="5、更新博客"><a href="#5、更新博客" class="headerlink" title="5、更新博客"></a>5、更新博客</h5><p>在路径source_posts下创建md文件，使用markdown语法编写<br>开头书写标题</p>
+<p>上传github（需要输入账号密码）：hexo d<br>输入网址即可访问</p>
+<h1 id="5、更新博客"><a href="#5、更新博客" class="headerlink" title="5、更新博客"></a>5、更新博客</h1><p>在路径source_posts下创建md文件，使用markdown语法编写<br>开头书写标题</p>
 <figure class="highlight md"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line"><span class="section">title: 标题名</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="6、跟换主题"><a href="#6、跟换主题" class="headerlink" title="6、跟换主题"></a>6、跟换主题</h5><p><a href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
-<p>按链接步骤安装新主题</p>
+<h1 id="6、跟换主题"><a href="#6、跟换主题" class="headerlink" title="6、跟换主题"></a>6、跟换主题</h1><p><a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>按链接步骤安装新主题</p>
 ]]></content>
   </entry>
 </search>
