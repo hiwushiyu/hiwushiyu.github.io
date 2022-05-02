@@ -2,11 +2,15 @@
 <search>
   <entry>
     <title>hexo和github搭建个人博客</title>
-    <url>/2022/05/02/hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <url>/2022/05/01/hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
 <li><p>Node.js</p>
 <p> 官网：<a href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a></p>
 </li>
+</ol>
+<span id="more"></span>
+
+<ol start="2">
 <li><p>Git</p>
 <p> 官网：<a href="https://git-scm.com/">https://git-scm.com/</a><br> 验证安装是否完成，命令函输入：node -v、npm -v、git –version</p>
 </li>
@@ -49,5 +53,11 @@ github--&gt;Settings--&gt;SSH and GPG keys--&gt;New SSH key--&gt;Title随意--&g
 
 <h1 id="6、跟换主题"><a href="#6、跟换主题" class="headerlink" title="6、跟换主题"></a>6、跟换主题</h1><p><a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>按链接步骤安装新主题</p>
 ]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
   </entry>
 </search>
