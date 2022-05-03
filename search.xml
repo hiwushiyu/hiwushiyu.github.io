@@ -26,7 +26,10 @@
             <p>仓库名：github账号名.github.io</p>
           </div>
 <p>勾选创建readme文件</p>
-<h1 id="3、生成ssh-key"><a href="#3、生成ssh-key" class="headerlink" title="3、生成ssh key"></a>3、生成ssh key</h1><p>空白区域右击文件夹–&gt;Git Bash here<br>输入ssh，检测电脑是否安装ssh</p>
+<h1 id="3、生成ssh-key"><a href="#3、生成ssh-key" class="headerlink" title="3、生成ssh key"></a>3、生成ssh key</h1><div class="note note-info">
+            <p>空白区域右击文件夹–&gt;Git Bash here</p>
+          </div>
+<p>输入ssh，检测电脑是否安装ssh</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ ssh<br>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]<br>           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]<br>           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]<br>           [-i identity_file] [-J [user@]host[:port]] [-L address]<br>           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]<br>           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]<br>           [-w local_tun[:remote_tun]] destination [<span class="hljs-built_in">command</span> [argument ...]]<br></code></pre></div></td></tr></table></figure>
 
 <p>输入：</p>
