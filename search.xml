@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++基础高频提问</title>
+    <url>/2022/05/03/C++%E5%9F%BA%E7%A1%80%E9%AB%98%E9%A2%91%E6%8F%90%E9%97%AE/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用hexo和github搭建个博</title>
-    <url>/2022/05/01/hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <url>/2022/05/01/%E4%BD%BF%E7%94%A8hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E5%8D%9A/</url>
     <content><![CDATA[<h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
 <li><p>Node.js</p>
 <div class="note note-info">
             <p>官网：<a href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a></p>
           </div>
-<span id="more"></span>
 </li>
 <li><p>Git</p>
 <div class="note note-info">
