@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++基础高频提问</title>
+    <url>/2022/05/02/C++%E5%9F%BA%E7%A1%80%E9%AB%98%E9%A2%91%E6%8F%90%E9%97%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="note note-info">
+            <p><a href="/2022/05/04/%E5%9C%A8main%E5%87%BD%E6%95%B0%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81/" title="1、在main函数之前和之后执行代码（☆）">1、在main函数之前和之后执行代码（☆）</a></p><p><a href="/2022/05/04/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" title="2、计算一个结构体占用空间（☆）">2、计算一个结构体占用空间（☆）</a></p>
+          </div>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>gdb调试与valgrind检测内存泄漏</title>
     <url>/2022/05/03/gdb%E8%B0%83%E8%AF%95%E4%B8%8Evalgrind%E6%A3%80%E6%B5%8B%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</url>
-    <content><![CDATA[<h1 id="使用gdb调试代码"><a href="#使用gdb调试代码" class="headerlink" title="使用gdb调试代码"></a>使用gdb调试代码</h1><p>示例代码：test.c</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="使用gdb调试代码"><a href="#使用gdb调试代码" class="headerlink" title="使用gdb调试代码"></a>使用gdb调试代码</h1><p>示例代码：test.c</p>
 <figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C"><span class="hljs-comment">// test.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">sumN</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span><br>&#123;<br>    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>,i;<br>    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i &lt; n;i++)&#123;<br>        sum += i;<br>    &#125;<br>    <span class="hljs-keyword">return</span> sum;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-type">long</span> result = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">100</span>;i++)&#123;<br>        result += i;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;result[1-100] = %d\n&quot;</span>,result);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;result[1-200] = %d\n&quot;</span>,sumN(<span class="hljs-number">200</span>));<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">[root@localhost memleaktest]<span class="hljs-comment"># ls</span><br>test.c<br><span class="hljs-comment"># 一般编译指令，目标文件为test</span><br>[root@localhost memleaktest]<span class="hljs-comment"># gcc test.c -o test</span><br><span class="hljs-comment"># 需要使用gdb进行调试程序，因此在编译的时候需要加上-g</span><br>[root@localhost memleaktest]<span class="hljs-comment"># gcc -g test.c -o test</span><br><span class="hljs-comment"># 执行程序，查看输出</span><br>[root@localhost memleaktest]<span class="hljs-comment"># ./test </span><br>result[1-100] = 5050<br>result[1-200] = 19900<br></code></pre></div></td></tr></table></figure>
@@ -47,20 +62,9 @@
       </tags>
   </entry>
   <entry>
-    <title>C++基础高频提问</title>
-    <url>/2022/05/02/C++%E5%9F%BA%E7%A1%80%E9%AB%98%E9%A2%91%E6%8F%90%E9%97%AE/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用hexo和github搭建个博</title>
     <url>/2022/05/01/%E4%BD%BF%E7%94%A8hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E5%8D%9A/</url>
-    <content><![CDATA[<h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
 <li>Node.js</li>
 </ol>
 <div class="note note-info">
@@ -159,6 +163,68 @@
       </categories>
       <tags>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在main函数之前和之后执行代码</title>
+    <url>/2022/05/04/%E5%9C%A8main%E5%87%BD%E6%95%B0%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="main函数执行之前"><a href="#main函数执行之前" class="headerlink" title="main函数执行之前"></a>main函数执行之前</h1><ul>
+<li>设置栈指针</li>
+<li>初始化静态变量和全局变量</li>
+<li>未初始化全局变量赋初值</li>
+<li>全局对象初始化（调用构造函数）</li>
+<li>将argc，argv函数传递给main函数  <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">// main函数的参数传递</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the number of command line parameters is %d!\n&quot;</span>,argc );<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; argc; ++i)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;argv[%d] is %s\n&quot;</span>,i,argv[i]);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// C:\Users\wushiyu\Desktop&gt;test.exe wu shi yu go!</span><br><span class="hljs-comment">// the number of command line parameters is 5!</span><br><span class="hljs-comment">// argv[0] is test.exe</span><br><span class="hljs-comment">// argv[1] is wu</span><br><span class="hljs-comment">// argv[2] is shi</span><br><span class="hljs-comment">// argv[3] is yu</span><br><span class="hljs-comment">// argv[4] is go!</span><br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<div class="note note-info">
+            <p>因此，如果在main函数之前想执行一段代码，最简单的办法是：利用构造函数。</p>
+          </div>
+
+<p>类可以放在：</p>
+<ul>
+<li>全局变量</li>
+<li>静态变量</li>
+<li>include文件中的全局或静态变量</li>
+<li>namespace中</li>
+<li>……</li>
+</ul>
+<p>如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象A</span><br>B b; <span class="hljs-comment">//全局对象B</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// B before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// B after main</span><br><span class="hljs-comment">// A after main()</span><br></code></pre></div></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>注意：</p><ul><li>执行顺序为：构造函数、main函数、析构函数</li><li>当有多个对象时，先定义先构造后析构</li></ul>
+          </div>
+
+
+<h1 id="main函数执行之后"><a href="#main函数执行之后" class="headerlink" title="main函数执行之后"></a>main函数执行之后</h1><ul>
+<li>全局对象的析构在main函数之后（同上）</li>
+<li><strong>atexit</strong>（C++） 、**_onexit**（C）注册的函数，会在main函数之后执行</li>
+</ul>
+<p>如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">func_onexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_onexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func_atexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_atexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    _onexit(func_onexit);<br>    <span class="hljs-built_in">atexit</span>(func_atexit);<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// func_atexit</span><br><span class="hljs-comment">// func_onexit</span><br><span class="hljs-comment">// A after main</span><br></code></pre></div></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>注意：</p><ul><li>使用_onexit、atexit需要包含头文件<strong>cstdlib</strong></li><li>_onexit要求注册函数返回值为int型、atexit要求注册函数返回值类型为void型</li><li>注册函数的参数列表为空</li><li>_onexit和atexit可以混用</li><li>注册函数是一个入栈的过程，执行注册函数是一个出栈过程，因此以上代码先输出“func_atexit”，后输出“func_onexit”</li><li>全局对象、main、注册函数的执行顺序为：全局对象的构造函数、main函数、注册函数、全局对象的析构函数</li></ul>
+          </div>]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>结构体的内存对齐</title>
+    <url>/2022/05/04/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="note note-info">
+            <p>内存对齐规则</p><p>预处理指令：#pragma pack</p><p>C++11关键字：alignas、alignof</p><p>static成员</p><p>位域</p><p>共用体与结构体</p>
+          </div>]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>面试</tag>
       </tags>
   </entry>
 </search>
