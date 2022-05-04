@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C++基础高频提问</title>
-    <url>/2022/05/02/C++%E5%9F%BA%E7%A1%80%E9%AB%98%E9%A2%91%E6%8F%90%E9%97%AE/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>gdb调试与valgrind检测内存泄漏</title>
     <url>/2022/05/03/gdb%E8%B0%83%E8%AF%95%E4%B8%8Evalgrind%E6%A3%80%E6%B5%8B%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</url>
     <content><![CDATA[<h1 id="使用gdb调试代码"><a href="#使用gdb调试代码" class="headerlink" title="使用gdb调试代码"></a>使用gdb调试代码</h1><p>示例代码：test.c</p>
@@ -58,6 +47,17 @@
       </tags>
   </entry>
   <entry>
+    <title>C++基础高频提问</title>
+    <url>/2022/05/02/C++%E5%9F%BA%E7%A1%80%E9%AB%98%E9%A2%91%E6%8F%90%E9%97%AE/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用hexo和github搭建个博</title>
     <url>/2022/05/01/%E4%BD%BF%E7%94%A8hexo%E5%92%8Cgithub%E6%90%AD%E5%BB%BA%E4%B8%AA%E5%8D%9A/</url>
     <content><![CDATA[<h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
@@ -73,16 +73,16 @@
 <div class="note note-info">
             <p>官网：<a href="https://git-scm.com/">https://git-scm.com/</a></p>
           </div>
-<div class="hljs code-wrapper"><pre><code class="hljs">验证安装是否完成，命令函输入：
-</code></pre></div>
+
+<p>验证安装是否完成，命令函输入：</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>、npm -v、git --<span class="hljs-keyword">version</span><br></code></pre></div></td></tr></table></figure>
 
 <ol start="3">
 <li>hexo下载，命令行输入：</li>
 </ol>
 <figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm">npm install hexo-<span class="hljs-keyword">cli</span> -g<br></code></pre></div></td></tr></table></figure>
-<div class="hljs code-wrapper"><pre><code class="hljs">验证安装是否完成，命令行输入：
-</code></pre></div>
+
+<p>验证安装是否完成，命令行输入：</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo -v</span><br></code></pre></div></td></tr></table></figure>
 
 <h1 id="2、创建github仓库"><a href="#2、创建github仓库" class="headerlink" title="2、创建github仓库"></a>2、创建github仓库</h1><div class="note note-info">
