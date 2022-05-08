@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/hiwushiyuicon.jpg">
+  <link rel="icon" href="/img/hiwushiyuicon.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -21,13 +21,13 @@
     <meta name="description" content="结构体对齐内存的规则是什么？如何计算一个结构体占用空间？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="结构体的内存对齐">
-<meta property="og:url" content="http://example.com/2022/05/04/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/index.html">
-<meta property="og:site_name" content="hiwushiyu">
+<meta property="og:url" content="http://example.com/2022/05/08/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/index.html">
+<meta property="og:site_name" content="hiwushiyu&#39;s blog">
 <meta property="og:description" content="结构体对齐内存的规则是什么？如何计算一个结构体占用空间？">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.stocksnap.io/img-thumbs/280h/macro-computer_O7NIMDXKMF.jpg">
-<meta property="article:published_time" content="2022-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-07T18:04:18.993Z">
+<meta property="article:published_time" content="2022-05-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-08T09:01:15.464Z">
 <meta property="article:author" content="hiwushiyu">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="面试">
@@ -35,7 +35,7 @@
 <meta name="twitter:image" content="https://cdn.stocksnap.io/img-thumbs/280h/macro-computer_O7NIMDXKMF.jpg">
   
   
-  <title>结构体的内存对齐 - hiwushiyu</title>
+  <title>结构体的内存对齐 - hiwushiyu&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -84,7 +84,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>hiwushiyu</strong>
+      <strong>hiwushiyu&#39;s blog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -179,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-04 00:00" pubdate>
-        2022年5月4日
+      <time datetime="2022-05-08 00:00" pubdate>
+        2022年5月8日
       </time>
     </span>
   
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.1k 字
+      7.3k 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      51 分钟
+      62 分钟
     </span>
   
 
@@ -291,7 +291,28 @@
 <p><strong>例4.1</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">TEST</span>&#123;<br>	<span class="hljs-type">char</span> a;<br>	<span class="hljs-type">static</span> <span class="hljs-type">int</span> b;<br>	<span class="hljs-type">short</span> c;<br>&#125;;<br><span class="hljs-type">int</span> TEST::b = <span class="hljs-number">1</span>;  <span class="hljs-comment">// 静态成员初始化 </span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	TEST test;<br>	cout&lt;&lt;(<span class="hljs-type">int</span>)&amp;(test.a) - (<span class="hljs-type">int</span>)&amp;test&lt;&lt;endl;<br>	cout&lt;&lt;(<span class="hljs-type">int</span>)&amp;(test.b) - (<span class="hljs-type">int</span>)&amp;test&lt;&lt;endl;<br>	cout&lt;&lt;(<span class="hljs-type">int</span>)&amp;(test.c) - (<span class="hljs-type">int</span>)&amp;test&lt;&lt;endl;<br>	cout&lt;&lt;<span class="hljs-built_in">sizeof</span>(TEST)&lt;&lt;endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// 0</span><br><span class="hljs-comment">// -2485896</span><br><span class="hljs-comment">// 2</span><br><span class="hljs-comment">// 4</span><br></code></pre></div></td></tr></table></figure>
 <p><img src="/img/../../img/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/006.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="位域"><a href="#位域" class="headerlink" title="位域"></a>位域</h1><h1 id="共用体与结构体"><a href="#共用体与结构体" class="headerlink" title="共用体与结构体"></a>共用体与结构体</h1>
+<h1 id="位域"><a href="#位域" class="headerlink" title="位域"></a>位域</h1><p>在声明结构体时，可以指定其成员占用存储空间的二进制位数，这样的成员称为位域。</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">TEST</span>&#123;<br>	<span class="hljs-type">int</span> a:<span class="hljs-number">3</span><br>	<span class="hljs-type">int</span> b:<span class="hljs-number">4</span><br>&#125;;<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="/img/../../img/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/007.png" srcset="/img/loading.gif" lazyload></p>
+<p>TSET中定义两个位域成员a、b，他们分别占int类型8位中的3位和4位，因此结构体只需要申请一个int类型的存储空间即可容纳</p>
+<div class="note note-info">
+            <ul><li>本质上，位域是按其类型所对应的存储单位存放的，即将位域存放在一个单元里</li><li>若位数不够时，则再分配一个单元</li><li>位域的长度不能超过其类型所占的长度，且必须存储在听一个存储单元里</li><li>如果剩余的内存单元不能容下下一个位域则空闲不用</li></ul>
+          </div>
+
+<p><strong>例5.1</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">TEST</span>&#123;<br>	<span class="hljs-type">int</span> a;<br>	<span class="hljs-type">char</span> b:<span class="hljs-number">2</span>;<br>	<span class="hljs-type">char</span> c:<span class="hljs-number">3</span>;<br>	<span class="hljs-type">char</span> d;<br>	<span class="hljs-type">char</span> e:<span class="hljs-number">6</span>;<br>	<span class="hljs-type">char</span> f:<span class="hljs-number">7</span>;<br>	<span class="hljs-type">int</span> g;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	TEST test;<br>	cout&lt;&lt;(<span class="hljs-type">int</span>)&amp;(test.a) - (<span class="hljs-type">int</span>)&amp;test&lt;&lt;endl;<br>	cout&lt;&lt;(<span class="hljs-type">int</span>)&amp;(test.d) - (<span class="hljs-type">int</span>)&amp;test&lt;&lt;endl;<br>	cout&lt;&lt;(<span class="hljs-type">int</span>)&amp;(test.g) - (<span class="hljs-type">int</span>)&amp;test&lt;&lt;endl;<br>	cout&lt;&lt;<span class="hljs-built_in">sizeof</span>(TEST)&lt;&lt;endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// 0</span><br><span class="hljs-comment">// 5</span><br><span class="hljs-comment">// 8</span><br><span class="hljs-comment">// 12</span><br></code></pre></div></td></tr></table></figure>
+<p><img src="/img/../../img/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/008.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <ul><li>结构体TEST的首元素的地址为0，占4个字节</li><li>第2、3个成员为char类型的位域，分别占2、3位，因此分配了1个char类型的存储空间，有3位为空闲位</li><li>第4个成员为char类型，地址为5，占一个字节</li><li>第5、6个成员为char类型的位域，分别占6、7位，需要分配2个char类型的存储空间，第一个成员占6位，空2位；第二个成员占7位，空1位</li><li>第7个成员位int类型，地址为8，占4个字节</li><li>结构体中，最大成员占4个字节，因此结构体的总长度应为4的倍数，所以占12个字节</li></ul>
+          </div>
+
+<h1 id="共用体与结构体"><a href="#共用体与结构体" class="headerlink" title="共用体与结构体"></a>共用体与结构体</h1><p>共用体是一种成员共享存储空间的结构体类型。<br>共用体所占的内存是所有成员内存长度的最大值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">A</span>&#123;<br>	<span class="hljs-type">int</span> m;<br>	<span class="hljs-type">char</span> a,b;<br>	<span class="hljs-type">short</span> n;<br>&#125;;<br><span class="hljs-keyword">union</span> <span class="hljs-title class_">B</span>&#123;<br>	<span class="hljs-type">int</span> m;<br>	<span class="hljs-type">char</span> a,b;<br>	<span class="hljs-type">short</span> n;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	cout&lt;&lt;<span class="hljs-built_in">sizeof</span>(A)&lt;&lt;endl;<br>	cout&lt;&lt;<span class="hljs-built_in">sizeof</span>(B)&lt;&lt;endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// 8</span><br><span class="hljs-comment">// 4</span><br></code></pre></div></td></tr></table></figure>
+<p><img src="/img/../../img/%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/009.png" srcset="/img/loading.gif" lazyload></p>
+<div class="note note-info">
+            <ul><li>结构体按规则对齐，故A所占字节为8</li><li>公用体因为每个元素都共享一段内存空间，因此B所占字节数是长度最大成员的字节数，占4字节</li></ul>
+          </div>
             </div>
             <hr>
             <div>
@@ -327,18 +348,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/04/%E5%9C%A8main%E5%87%BD%E6%95%B0%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">在main函数之前和之后执行代码</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/03/gdb%E8%B0%83%E8%AF%95%E4%B8%8Evalgrind%E6%A3%80%E6%B5%8B%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">
-                        <span class="hidden-mobile">gdb调试与valgrind检测内存泄漏</span>
+                      <a href="/2022/05/04/%E5%9C%A8main%E5%87%BD%E6%95%B0%E4%B9%8B%E5%89%8D%E5%92%8C%E4%B9%8B%E5%90%8E%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81/">
+                        <span class="hidden-mobile">在main函数之前和之后执行代码</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -434,7 +449,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    
   </div>
   
   <div class="statistics">
