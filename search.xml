@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>在main函数之前和之后执行代码</title>
+    <url>/2022/05/04/zmhszqhzhzxdm/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="main函数执行之前"><a href="#main函数执行之前" class="headerlink" title="main函数执行之前"></a>main函数执行之前</h1><ul>
+<li>设置栈指针</li>
+<li>初始化静态变量和全局变量</li>
+<li>未初始化全局变量赋初值</li>
+<li>全局对象初始化（调用构造函数）</li>
+<li>将argc，argv函数传递给main函数  <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">// main函数的参数传递</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the number of command line parameters is %d!\n&quot;</span>,argc );<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; argc; ++i)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;argv[%d] is %s\n&quot;</span>,i,argv[i]);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// C:\Users\wushiyu\Desktop&gt;test.exe wu shi yu go!</span><br><span class="hljs-comment">// the number of command line parameters is 5!</span><br><span class="hljs-comment">// argv[0] is test.exe</span><br><span class="hljs-comment">// argv[1] is wu</span><br><span class="hljs-comment">// argv[2] is shi</span><br><span class="hljs-comment">// argv[3] is yu</span><br><span class="hljs-comment">// argv[4] is go!</span><br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<div class="note note-info">
+            <p>因此，如果在main函数之前想执行一段代码，最简单的办法是：利用构造函数。</p>
+          </div>
+
+<p>类可以放在：</p>
+<ul>
+<li>全局变量</li>
+<li>静态变量</li>
+<li>include文件中的全局或静态变量</li>
+<li>namespace中</li>
+<li>……</li>
+</ul>
+<p>如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象A</span><br>B b; <span class="hljs-comment">//全局对象B</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// B before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// B after main</span><br><span class="hljs-comment">// A after main()</span><br></code></pre></div></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>注意：</p><ul><li>执行顺序为：构造函数、main函数、析构函数</li><li>当有多个对象时，先定义先构造后析构</li></ul>
+          </div>
+
+
+<h1 id="main函数执行之后"><a href="#main函数执行之后" class="headerlink" title="main函数执行之后"></a>main函数执行之后</h1><ul>
+<li>全局对象的析构在main函数之后（同上）</li>
+<li><strong>atexit</strong>（C++） 、**_onexit**（C）注册的函数，会在main函数之后执行</li>
+</ul>
+<p>如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">func_onexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_onexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func_atexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_atexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    _onexit(func_onexit);<br>    <span class="hljs-built_in">atexit</span>(func_atexit);<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// func_atexit</span><br><span class="hljs-comment">// func_onexit</span><br><span class="hljs-comment">// A after main</span><br></code></pre></div></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>注意：</p><ul><li>使用_onexit、atexit需要包含头文件<strong>cstdlib</strong></li><li>_onexit要求注册函数返回值为int型、atexit要求注册函数返回值类型为void型</li><li>注册函数的参数列表为空</li><li>_onexit和atexit可以混用</li><li>注册函数是一个入栈的过程，执行注册函数是一个出栈过程，因此以上代码先输出“func_atexit”，后输出“func_onexit”</li><li>全局对象、main、注册函数的执行顺序为：全局对象的构造函数、main函数、注册函数、全局对象的析构函数</li></ul>
+          </div>]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>gdb调试与valgrind检测内存泄漏</title>
     <url>/2022/05/03/gtsyvjcncxl/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="使用gdb调试代码"><a href="#使用gdb调试代码" class="headerlink" title="使用gdb调试代码"></a>使用gdb调试代码</h1><p>示例代码：test.c</p>
@@ -44,6 +92,110 @@
       </categories>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用hexo和github搭建个博</title>
+    <url>/2022/05/01/syhhgdjgb/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
+<li>Node.js</li>
+</ol>
+<div class="note note-info">
+            <p>官网：<a href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a></p>
+          </div>
+
+<ol start="2">
+<li>Git</li>
+</ol>
+<div class="note note-info">
+            <p>官网：<a href="https://git-scm.com/">https://git-scm.com/</a></p>
+          </div>
+
+<p>验证安装是否完成，命令函输入：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>、npm -v、git --<span class="hljs-keyword">version</span><br></code></pre></div></td></tr></table></figure>
+
+<ol start="3">
+<li>hexo下载，命令行输入：</li>
+</ol>
+<figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm">npm install hexo-<span class="hljs-keyword">cli</span> -g<br></code></pre></div></td></tr></table></figure>
+
+<p>验证安装是否完成，命令行输入：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo -v</span><br></code></pre></div></td></tr></table></figure>
+
+<h1 id="2、创建github仓库"><a href="#2、创建github仓库" class="headerlink" title="2、创建github仓库"></a>2、创建github仓库</h1><div class="note note-info">
+            <p>仓库名：github账号名.github.io</p>
+          </div>
+<p>勾选创建readme文件</p>
+<h1 id="3、生成ssh-key"><a href="#3、生成ssh-key" class="headerlink" title="3、生成ssh key"></a>3、生成ssh key</h1><div class="note note-info">
+            <p>空白区域右击文件夹–&gt;Git Bash here</p>
+          </div>
+<p>输入ssh，检测电脑是否安装ssh</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ ssh<br>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]<br>           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]<br>           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]<br>           [-i identity_file] [-J [user@]host[:port]] [-L address]<br>           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]<br>           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]<br>           [-w local_tun[:remote_tun]] destination [<span class="hljs-built_in">command</span> [argument ...]]<br></code></pre></div></td></tr></table></figure>
+
+<p>输入：</p>
+<figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> rsa -C <span class="hljs-string">&quot;github账号邮箱&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>四次回车后会在本地生成文件夹，路径：</p>
+<div class="note note-info">
+            <p>C:\Users\用户名\.ssh\id_rsa.pub</p>
+          </div>
+
+<p>复制文件夹中的内容至</p>
+<div class="note note-info">
+            <p>github–&gt;Settings–&gt;SSH and GPG keys–&gt;New SSH key–&gt;Title随意–&gt;Key粘贴–&gt;Add SSH key</p>
+          </div>
+
+<p>验证是否绑定成功，输入指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ ssh -T git@github.com<br><br>Hi hiwushiyu! You<span class="hljs-string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></code></pre></div></td></tr></table></figure>
+
+<h1 id="4、本地生成博客内容"><a href="#4、本地生成博客内容" class="headerlink" title="4、本地生成博客内容"></a>4、本地生成博客内容</h1><div class="note note-info">
+            <p>本地新建文件夹–&gt;空白处右击–&gt;Get Bash here</p>
+          </div>
+
+<ol>
+<li>安装hexo</li>
+</ol>
+<figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">npm <span class="hljs-keyword">install</span> hexo<br></code></pre></div></td></tr></table></figure>
+
+<ol start="2">
+<li>初始化hexo（文件夹中生成文件）</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">hexo <span class="hljs-keyword">init</span><br></code></pre></div></td></tr></table></figure>
+
+<ol start="3">
+<li>本地生成静态页面</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ hexo s<br>INFO  Validating config<br>INFO  Start processing<br>INFO  Hexo is running at http://localhost:4000/ . Press Ctrl+C to stop.<br></code></pre></div></td></tr></table></figure>
+
+<p>浏览器输入网页<a href="http://localhost:4000/%EF%BC%8C%E5%8D%B3%E5%8F%AF%E6%9F%A5%E7%9C%8B">http://localhost:4000/，即可查看</a></p>
+<ol>
+<li>发布博客至github服务器</li>
+</ol>
+<div class="note note-info">
+            <p>修改配置文件：_config.yml</p>
+          </div>
+
+<figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repository:</span> <span class="hljs-string">仓库地址</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></div></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>博客根目录下Get Bash here–&gt;安装自动化部署工具：npm install hexo-deployer-git –save</p>
+          </div>
+
+<p>生成页面：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo g</span><br></code></pre></div></td></tr></table></figure>
+<p>上传github（需要输入账号密码）：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo d</span><br></code></pre></div></td></tr></table></figure>
+<p>输入网址即可访问</p>
+<h1 id="5、更新博客"><a href="#5、更新博客" class="headerlink" title="5、更新博客"></a>5、更新博客</h1><p>在路径source_posts下创建md文件，使用markdown语法编写<br>开头书写标题</p>
+<figure class="highlight md"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs md">---<br><span class="hljs-section">title: 标题名</span><br><span class="hljs-section">---</span><br></code></pre></div></td></tr></table></figure>
+
+<h1 id="6、更换主题"><a href="#6、更换主题" class="headerlink" title="6、更换主题"></a>6、更换主题</h1><p><a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>按链接步骤安装新主题</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -152,158 +304,6 @@
       <tags>
         <tag>C++</tag>
         <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在main函数之前和之后执行代码</title>
-    <url>/2022/05/04/zmhszqhzhzxdm/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="main函数执行之前"><a href="#main函数执行之前" class="headerlink" title="main函数执行之前"></a>main函数执行之前</h1><ul>
-<li>设置栈指针</li>
-<li>初始化静态变量和全局变量</li>
-<li>未初始化全局变量赋初值</li>
-<li>全局对象初始化（调用构造函数）</li>
-<li>将argc，argv函数传递给main函数  <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">// main函数的参数传递</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the number of command line parameters is %d!\n&quot;</span>,argc );<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; argc; ++i)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;argv[%d] is %s\n&quot;</span>,i,argv[i]);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// C:\Users\wushiyu\Desktop&gt;test.exe wu shi yu go!</span><br><span class="hljs-comment">// the number of command line parameters is 5!</span><br><span class="hljs-comment">// argv[0] is test.exe</span><br><span class="hljs-comment">// argv[1] is wu</span><br><span class="hljs-comment">// argv[2] is shi</span><br><span class="hljs-comment">// argv[3] is yu</span><br><span class="hljs-comment">// argv[4] is go!</span><br></code></pre></div></td></tr></table></figure></li>
-</ul>
-<div class="note note-info">
-            <p>因此，如果在main函数之前想执行一段代码，最简单的办法是：利用构造函数。</p>
-          </div>
-
-<p>类可以放在：</p>
-<ul>
-<li>全局变量</li>
-<li>静态变量</li>
-<li>include文件中的全局或静态变量</li>
-<li>namespace中</li>
-<li>……</li>
-</ul>
-<p>如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象A</span><br>B b; <span class="hljs-comment">//全局对象B</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// B before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// B after main</span><br><span class="hljs-comment">// A after main()</span><br></code></pre></div></td></tr></table></figure>
-
-<div class="note note-info">
-            <p>注意：</p><ul><li>执行顺序为：构造函数、main函数、析构函数</li><li>当有多个对象时，先定义先构造后析构</li></ul>
-          </div>
-
-
-<h1 id="main函数执行之后"><a href="#main函数执行之后" class="headerlink" title="main函数执行之后"></a>main函数执行之后</h1><ul>
-<li>全局对象的析构在main函数之后（同上）</li>
-<li><strong>atexit</strong>（C++） 、**_onexit**（C）注册的函数，会在main函数之后执行</li>
-</ul>
-<p>如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">func_onexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_onexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func_atexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_atexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    _onexit(func_onexit);<br>    <span class="hljs-built_in">atexit</span>(func_atexit);<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// func_atexit</span><br><span class="hljs-comment">// func_onexit</span><br><span class="hljs-comment">// A after main</span><br></code></pre></div></td></tr></table></figure>
-
-<div class="note note-info">
-            <p>注意：</p><ul><li>使用_onexit、atexit需要包含头文件<strong>cstdlib</strong></li><li>_onexit要求注册函数返回值为int型、atexit要求注册函数返回值类型为void型</li><li>注册函数的参数列表为空</li><li>_onexit和atexit可以混用</li><li>注册函数是一个入栈的过程，执行注册函数是一个出栈过程，因此以上代码先输出“func_atexit”，后输出“func_onexit”</li><li>全局对象、main、注册函数的执行顺序为：全局对象的构造函数、main函数、注册函数、全局对象的析构函数</li></ul>
-          </div>]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-        <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用hexo和github搭建个博</title>
-    <url>/2022/05/01/syhhgdjgb/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="1、工具"><a href="#1、工具" class="headerlink" title="1、工具"></a>1、工具</h1><ol>
-<li>Node.js</li>
-</ol>
-<div class="note note-info">
-            <p>官网：<a href="https://nodejs.org/zh-cn/download/">https://nodejs.org/zh-cn/download/</a></p>
-          </div>
-
-<ol start="2">
-<li>Git</li>
-</ol>
-<div class="note note-info">
-            <p>官网：<a href="https://git-scm.com/">https://git-scm.com/</a></p>
-          </div>
-
-<p>验证安装是否完成，命令函输入：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>、npm -v、git --<span class="hljs-keyword">version</span><br></code></pre></div></td></tr></table></figure>
-
-<ol start="3">
-<li>hexo下载，命令行输入：</li>
-</ol>
-<figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm">npm install hexo-<span class="hljs-keyword">cli</span> -g<br></code></pre></div></td></tr></table></figure>
-
-<p>验证安装是否完成，命令行输入：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo -v</span><br></code></pre></div></td></tr></table></figure>
-
-<h1 id="2、创建github仓库"><a href="#2、创建github仓库" class="headerlink" title="2、创建github仓库"></a>2、创建github仓库</h1><div class="note note-info">
-            <p>仓库名：github账号名.github.io</p>
-          </div>
-<p>勾选创建readme文件</p>
-<h1 id="3、生成ssh-key"><a href="#3、生成ssh-key" class="headerlink" title="3、生成ssh key"></a>3、生成ssh key</h1><div class="note note-info">
-            <p>空白区域右击文件夹–&gt;Git Bash here</p>
-          </div>
-<p>输入ssh，检测电脑是否安装ssh</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ ssh<br>usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]<br>           [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]<br>           [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]<br>           [-i identity_file] [-J [user@]host[:port]] [-L address]<br>           [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]<br>           [-Q query_option] [-R address] [-S ctl_path] [-W host:port]<br>           [-w local_tun[:remote_tun]] destination [<span class="hljs-built_in">command</span> [argument ...]]<br></code></pre></div></td></tr></table></figure>
-
-<p>输入：</p>
-<figure class="highlight excel"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> rsa -C <span class="hljs-string">&quot;github账号邮箱&quot;</span><br></code></pre></div></td></tr></table></figure>
-
-<p>四次回车后会在本地生成文件夹，路径：</p>
-<div class="note note-info">
-            <p>C:\Users\用户名\.ssh\id_rsa.pub</p>
-          </div>
-
-<p>复制文件夹中的内容至</p>
-<div class="note note-info">
-            <p>github–&gt;Settings–&gt;SSH and GPG keys–&gt;New SSH key–&gt;Title随意–&gt;Key粘贴–&gt;Add SSH key</p>
-          </div>
-
-<p>验证是否绑定成功，输入指令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ ssh -T git@github.com<br><br>Hi hiwushiyu! You<span class="hljs-string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></code></pre></div></td></tr></table></figure>
-
-<h1 id="4、本地生成博客内容"><a href="#4、本地生成博客内容" class="headerlink" title="4、本地生成博客内容"></a>4、本地生成博客内容</h1><div class="note note-info">
-            <p>本地新建文件夹–&gt;空白处右击–&gt;Get Bash here</p>
-          </div>
-
-<ol>
-<li>安装hexo</li>
-</ol>
-<figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">npm <span class="hljs-keyword">install</span> hexo<br></code></pre></div></td></tr></table></figure>
-
-<ol start="2">
-<li>初始化hexo（文件夹中生成文件）</li>
-</ol>
-<figure class="highlight csharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs csharp">hexo <span class="hljs-keyword">init</span><br></code></pre></div></td></tr></table></figure>
-
-<ol start="3">
-<li>本地生成静态页面</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ hexo s<br>INFO  Validating config<br>INFO  Start processing<br>INFO  Hexo is running at http://localhost:4000/ . Press Ctrl+C to stop.<br></code></pre></div></td></tr></table></figure>
-
-<p>浏览器输入网页<a href="http://localhost:4000/%EF%BC%8C%E5%8D%B3%E5%8F%AF%E6%9F%A5%E7%9C%8B">http://localhost:4000/，即可查看</a></p>
-<ol>
-<li>发布博客至github服务器</li>
-</ol>
-<div class="note note-info">
-            <p>修改配置文件：_config.yml</p>
-          </div>
-
-<figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repository:</span> <span class="hljs-string">仓库地址</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></div></td></tr></table></figure>
-
-<div class="note note-info">
-            <p>博客根目录下Get Bash here–&gt;安装自动化部署工具：npm install hexo-deployer-git –save</p>
-          </div>
-
-<p>生成页面：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo g</span><br></code></pre></div></td></tr></table></figure>
-<p>上传github（需要输入账号密码）：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo d</span><br></code></pre></div></td></tr></table></figure>
-<p>输入网址即可访问</p>
-<h1 id="5、更新博客"><a href="#5、更新博客" class="headerlink" title="5、更新博客"></a>5、更新博客</h1><p>在路径source_posts下创建md文件，使用markdown语法编写<br>开头书写标题</p>
-<figure class="highlight md"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs md">---<br><span class="hljs-section">title: 标题名</span><br><span class="hljs-section">---</span><br></code></pre></div></td></tr></table></figure>
-
-<h1 id="6、更换主题"><a href="#6、更换主题" class="headerlink" title="6、更换主题"></a>6、更换主题</h1><p><a href="https://hexo.io/themes/">https://hexo.io/themes/</a><br>按链接步骤安装新主题</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
