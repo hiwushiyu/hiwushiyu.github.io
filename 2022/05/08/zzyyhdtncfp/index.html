@@ -18,24 +18,24 @@
   <meta name="author" content="hiwushiyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="C++中程序的入口是main，那么如何在main函数之前和之后执行代码呢？">
+    <meta name="description" content="指针、引用和动态内存分配是C&#x2F;C++中重要的组成部分，程序员可以直接操作、管理内存（计算机中最关键和最稀缺的资源），以获得最佳性能。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在main函数之前和之后执行代码">
-<meta property="og:url" content="http://example.com/2022/05/04/zmhszqhzhzxdm/index.html">
+<meta property="og:title" content="指针、引用和动态内存分配">
+<meta property="og:url" content="http://example.com/2022/05/08/zzyyhdtncfp/index.html">
 <meta property="og:site_name" content="hiwushiyu&#39;s blog">
-<meta property="og:description" content="C++中程序的入口是main，那么如何在main函数之前和之后执行代码呢？">
+<meta property="og:description" content="指针、引用和动态内存分配是C&#x2F;C++中重要的组成部分，程序员可以直接操作、管理内存（计算机中最关键和最稀缺的资源），以获得最佳性能。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.stocksnap.io/img-thumbs/280h/workshop-wrench_O8DVPXYOIY.jpg">
-<meta property="article:published_time" content="2022-05-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-08T09:26:03.835Z">
+<meta property="og:image" content="https://www.educba.com/academy/wp-content/uploads/2018/09/C-Reference-vs-Pointer.jpg">
+<meta property="article:published_time" content="2022-05-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-29T15:12:24.451Z">
 <meta property="article:author" content="hiwushiyu">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.stocksnap.io/img-thumbs/280h/workshop-wrench_O8DVPXYOIY.jpg">
+<meta name="twitter:image" content="https://www.educba.com/academy/wp-content/uploads/2018/09/C-Reference-vs-Pointer.jpg">
   
   
-  <title>在main函数之前和之后执行代码 - hiwushiyu&#39;s blog</title>
+  <title>指针、引用和动态内存分配 - hiwushiyu&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -169,7 +169,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="在main函数之前和之后执行代码">
+            <span class="h2" id="subtitle" title="指针、引用和动态内存分配">
               
             </span>
 
@@ -179,8 +179,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-04 00:00" pubdate>
-        2022年5月4日
+      <time datetime="2022-05-08 00:00" pubdate>
+        2022年5月8日
       </time>
     </span>
   
@@ -190,7 +190,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      511 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      5 分钟
     </span>
   
 
@@ -228,46 +228,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">在main函数之前和之后执行代码</h1>
+            <h1 style="display: none">指针、引用和动态内存分配</h1>
             
             <div class="markdown-body">
-              <h1 id="main函数执行之前"><a href="#main函数执行之前" class="headerlink" title="main函数执行之前"></a>main函数执行之前</h1><ul>
-<li>设置栈指针</li>
-<li>初始化静态变量和全局变量</li>
-<li>未初始化全局变量赋初值</li>
-<li>全局对象初始化（调用构造函数）</li>
-<li>将argc，argv函数传递给main函数  <figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-comment">// main函数的参数传递</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> <span class="hljs-type">const</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the number of command line parameters is %d!\n&quot;</span>,argc );<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; argc; ++i)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;argv[%d] is %s\n&quot;</span>,i,argv[i]);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// C:\Users\wushiyu\Desktop&gt;test.exe wu shi yu go!</span><br><span class="hljs-comment">// the number of command line parameters is 5!</span><br><span class="hljs-comment">// argv[0] is test.exe</span><br><span class="hljs-comment">// argv[1] is wu</span><br><span class="hljs-comment">// argv[2] is shi</span><br><span class="hljs-comment">// argv[3] is yu</span><br><span class="hljs-comment">// argv[4] is go!</span><br></code></pre></div></td></tr></table></figure></li>
-</ul>
-<div class="note note-info">
-            <p>因此，如果在main函数之前想执行一段代码，最简单的办法是：利用构造函数。</p>
-          </div>
+              <p><a target="_blank" rel="noopener" href="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp4_PointerReference.html">https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp4_PointerReference.html</a></p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>每一块计算机内存有一个地址，存储着相应的数据内容，这块数据的含义是由程序员来解释决定，如整数、浮点数、字符或字符串等。但是，地址是用一串数字（通常16进制）来表示，这对于程序员来说是很难直接使用的。</p>
+<p><img src="https://tse1-mm.cn.bing.net/th/id/R-C.0d2dc01ae46f55e30981e79b518ac43c?rik=Qqal8NhH6Sm6rA&riu=http://s3.amazonaws.com/s3.timetoast.com/public/uploads/photos/6379214/pc.png?1477388469&ehk=QbAVvCahknwTjV3RqCkVPKlg/FQwUCeub7qckPxKZBI=&risl=&pid=ImgRaw&r=0" srcset="/img/loading.gif" lazyload></p>
+<p>为了减轻程序员在编程时使用数字地址和解释数据的负担，早期的编程语言（如C语言）引入了变量的概念。变量是内存的名称，存储着特定类型的数据。自此，变量（标识符）与内存地址、类型、内存中的数据有了唯一的对应关系。</p>
+<p>下图展示了计算机内存地址、数据内容与编程时使用的变量名、变量类型和变量值之间的关系。</p>
+<p><img src="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/images/MemoryAddressContent.png" srcset="/img/loading.gif" lazyload></p>
+<p>图中数值都使用了16进制表示。32位机器中，地址用4个字节表示，每一个地址对应的内存可以存储1个字节的数据。标识符sum位int型，占4个字节，因此其在内存中的地址范围为：90 00 00 00 ~ 90 00 00 03，内存中的数据为：00 00 00 FF,转换成10进制为255。</p>
+<h1 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h1><p>不同于其他变量的是，指针变量（简称指针）存储的是内存地址</p>
+<h2 id="声明指针"><a href="#声明指针" class="headerlink" title="声明指针"></a>声明指针</h2><p>如其他变量一样，指针必须先声明才能使用</p>
 
-<p>类可以放在：</p>
-<ul>
-<li>全局变量</li>
-<li>静态变量</li>
-<li>include文件中的全局或静态变量</li>
-<li>namespace中</li>
-<li>……</li>
-</ul>
-<p>如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">B</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;B after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象A</span><br>B b; <span class="hljs-comment">//全局对象B</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// B before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// B after main</span><br><span class="hljs-comment">// A after main()</span><br></code></pre></div></td></tr></table></figure>
-
-<div class="note note-info">
-            <p>注意：</p><ul><li>执行顺序为：构造函数、main函数、析构函数</li><li>当有多个对象时，先定义先构造后析构</li></ul>
-          </div>
-
-
-<h1 id="main函数执行之后"><a href="#main函数执行之后" class="headerlink" title="main函数执行之后"></a>main函数执行之后</h1><ul>
-<li>全局对象的析构在main函数之后（同上）</li>
-<li><strong>atexit</strong>（C++） 、**_onexit**（C）注册的函数，会在main函数之后执行</li>
-</ul>
-<p>如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">func_onexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_onexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">func_atexit</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;func_atexit&quot;</span> &lt;&lt; endl;<br>&#125;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A before main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>    ~<span class="hljs-built_in">A</span>()&#123;<br>        cout &lt;&lt; <span class="hljs-string">&quot;A after main&quot;</span> &lt;&lt; endl;<br>    &#125;<br>&#125;;<br>A a; <span class="hljs-comment">//全局对象</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    _onexit(func_onexit);<br>    <span class="hljs-built_in">atexit</span>(func_atexit);<br>    cout &lt;&lt; <span class="hljs-string">&quot;main in&quot;</span> &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;main out&quot;</span> &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">// 运行结果</span><br><span class="hljs-comment">// A before main</span><br><span class="hljs-comment">// main in</span><br><span class="hljs-comment">// main out</span><br><span class="hljs-comment">// func_atexit</span><br><span class="hljs-comment">// func_onexit</span><br><span class="hljs-comment">// A after main</span><br></code></pre></div></td></tr></table></figure>
-
-<div class="note note-info">
-            <p>注意：</p><ul><li>使用_onexit、atexit需要包含头文件<strong>cstdlib</strong></li><li>_onexit要求注册函数返回值为int型、atexit要求注册函数返回值类型为void型</li><li>注册函数的参数列表为空</li><li>_onexit和atexit可以混用</li><li>注册函数是一个入栈的过程，执行注册函数是一个出栈过程，因此以上代码先输出“func_atexit”，后输出“func_onexit”</li><li>全局对象、main、注册函数的执行顺序为：全局对象的构造函数、main函数、注册函数、全局对象的析构函数</li></ul>
-          </div>
             </div>
             <hr>
             <div>
@@ -303,9 +276,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/08/zzyyhdtncfp/">
+                      <a href="/2022/05/08/jgtdncdq/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">指针、引用和动态内存分配</span>
+                        <span class="hidden-mobile">结构体的内存对齐</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -313,8 +286,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/03/gtsyvjcncxl/">
-                        <span class="hidden-mobile">gdb调试与valgrind检测内存泄漏</span>
+                      <a href="/2022/05/04/zmhszqhzhzxdm/">
+                        <span class="hidden-mobile">在main函数之前和之后执行代码</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
