@@ -4,33 +4,6 @@
   
   
   <entry>
-    <title>指针、引用和动态内存分配</title>
-    <link href="/2022/05/08/zzyyhdtncfp/"/>
-    <url>/2022/05/08/zzyyhdtncfp/</url>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp4_PointerReference.html">https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp4_PointerReference.html</a></p><h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>每一块计算机内存有一个地址，存储着相应的数据内容，这块数据的含义是由程序员来解释决定，如整数、浮点数、字符或字符串等。但是，地址是用一串数字（通常16进制）来表示，这对于程序员来说是很难直接使用的。</p><p><img src="https://tse1-mm.cn.bing.net/th/id/R-C.0d2dc01ae46f55e30981e79b518ac43c?rik=Qqal8NhH6Sm6rA&riu=http://s3.amazonaws.com/s3.timetoast.com/public/uploads/photos/6379214/pc.png?1477388469&ehk=QbAVvCahknwTjV3RqCkVPKlg/FQwUCeub7qckPxKZBI=&risl=&pid=ImgRaw&r=0"></p><p>为了减轻程序员在编程时使用数字地址和解释数据的负担，早期的编程语言（如C语言）引入了变量的概念。变量是内存的名称，存储着特定类型的数据。自此，变量（标识符）与内存地址、类型、内存中的数据有了唯一的对应关系。</p><p>下图展示了计算机内存地址、数据内容与编程时使用的变量名、变量类型和变量值之间的关系。</p><p><img src="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/images/MemoryAddressContent.png"></p><p>图中数值都使用了16进制表示。32位机器中，地址用4个字节表示，每一个地址对应的内存可以存储1个字节的数据。标识符sum位int型，占4个字节，因此其在内存中的地址范围为：90 00 00 00 ~ 90 00 00 03，内存中的数据为：00 00 00 FF,转换成10进制为255。</p><h1 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h1><p>不同于其他变量的是，指针变量（简称指针）存储的是内存地址</p><h2 id="声明指针"><a href="#声明指针" class="headerlink" title="声明指针"></a>声明指针</h2><p>如其他变量一样，指针必须先声明才能使用</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>C++</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>C++</tag>
-      
-      <tag>面试</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>结构体的内存对齐</title>
     <link href="/2022/05/08/jgtdncdq/"/>
     <url>/2022/05/08/jgtdncdq/</url>
@@ -102,33 +75,6 @@
     <tags>
       
       <tag>C++</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>C++基础高频提问总结</title>
-    <link href="/2022/05/02/cjcgptw/"/>
-    <url>/2022/05/02/cjcgptw/</url>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="note note-info">            <p><a href="/2022/05/04/zmhszqhzhzxdm/" title="1、在main函数之前和之后执行代码（☆）">1、在main函数之前和之后执行代码（☆）</a></p><p><a href="/2022/05/08/jgtdncdq/" title="2、计算一个结构体占用空间（☆）">2、计算一个结构体占用空间（☆）</a></p>          </div>]]></content>
-    
-    
-    <categories>
-      
-      <category>C++</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>C++</tag>
-      
-      <tag>面试</tag>
       
     </tags>
     
