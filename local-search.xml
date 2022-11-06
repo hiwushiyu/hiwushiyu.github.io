@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>【笔记】侯捷 - C++面向对象高级编程</title>
+    <link href="/2022/11/06/bjhjcjjmxdxgjbc/"/>
+    <url>/2022/11/06/bjhjcjjmxdxgjbc/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="课程目标"><a href="#课程目标" class="headerlink" title="课程目标"></a>课程目标</h1><p>培养正规大气的编程习惯</p><div class="note note-info">            <p>以良好的方式编写C++ class（单一class的设计称为基于对象（Object Based））<br>类与类之间存在某种关联，称为面向对象（Object Oriented）</p>          </div><h1 id="C-VS-C-，关于数据和函数"><a href="#C-VS-C-，关于数据和函数" class="headerlink" title="C VS C++，关于数据和函数"></a>C VS C++，关于数据和函数</h1><p>C语言设计程序时，会准备<strong>数据和函数</strong>，会根据数据的类型创建出变量，函数来处理这些变量，由于语言没有提供足够的关键字，所以<strong>这些变量必须是全局的</strong>，函数都可以访问数据</p><p>C++把<strong>数据和处理这些数据的函数包含在一个class中</strong>，以此为一种形式，创建出一个个的对象</p><h1 id="C-代码基本形式"><a href="#C-代码基本形式" class="headerlink" title="C++代码基本形式"></a>C++代码基本形式</h1><p><img src="/../img/%E7%AC%94%E8%AE%B0%E4%BE%AF%E6%8D%B7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/001.png"></p><div class="note note-info">            <p>include标准库是用&lt;&gt;<br>include自己定义头文件用””</p>          </div><h1 id="头文件中的防御式写法"><a href="#头文件中的防御式写法" class="headerlink" title="头文件中的防御式写法"></a>头文件中的防御式写法</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>结构体的内存对齐</title>
     <link href="/2022/05/08/jgtdncdq/"/>
     <url>/2022/05/08/jgtdncdq/</url>
